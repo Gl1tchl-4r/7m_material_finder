@@ -86,7 +86,7 @@ local function tween(targetCFrame)
 
     local TweenService = game:GetService("TweenService")
 
-    local tweenInfo = TweenInfo.new(distance / 350, Enum.EasingStyle.Linear)
+    local tweenInfo = TweenInfo.new(distance / 300, Enum.EasingStyle.Linear)
     
     isTweening = true
 
@@ -397,7 +397,7 @@ local function Get_Dark_Flagment()
 
         repeat task.wait()
             collectChest()
-        until hasFOD() or (os.clock() - startTime) >= timeLimit
+        until hasFOD() or (os.clock() - startTime) >= timeLimit or Darkbeard
 
         if (os.clock() - startTime) >= timeLimit and not hasFOD() then
             while not hasFOD() do
