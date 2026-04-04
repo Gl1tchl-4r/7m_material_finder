@@ -327,6 +327,7 @@ local function collectChest()
     if not Nearest or not Nearest.Parent then return end
 
     if Nearest then
+        if humanoid.Sit then humanoid.Jump = true end
         tween(Nearest:GetPivot(), true)
         humanoid.Jump = true
     end
