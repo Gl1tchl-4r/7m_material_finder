@@ -316,19 +316,17 @@ local function collectChest()
     for i = 1, #Chests do
         local Chest = Chests[i]
         local Magnitude = (Chest:GetPivot().Position - Position).Magnitude
-        if not SelectedIsland or Chest:IsDescendantOf(SelectedIsland) then
-            if not Chest:GetAttribute("IsDisabled") and Magnitude < Distance then
-                Distance = Magnitude
-                Nearest = Chest
-            end
+        if (not Chest:GetAttribute("IsDisabled") or Chest.CanTouch) and Magnitude < Distance then
+            Distance = Magnitude
+            Nearest = Chest
         end
     end
 
     if not Nearest or not Nearest.Parent then return end
 
     if Nearest then
-        if humanoid.Sit then humanoid.Jump = true end
-        tween(Nearest:GetPivot(), true)
+        humanoid.Jump = true
+        tween(Nearest:GetPivot())
         humanoid.Jump = true
     end
 end
@@ -456,7 +454,7 @@ local function Buy_7m()
     if game:GetService("Lighting"):GetAttribute("MAP") ~= "Sea3" then tpWorld(3) end
     tween(CFrame.new(-16516.1328125, 23.38727569580078, -189.69615173339844))
     task.wait(0.5)
-    game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("CommF_"):InvokeServer("BuySanguineArt")
+    warn("Done: Waiting to buy 7M")
 end
 
 local function Main()
@@ -469,6 +467,7 @@ local function Main()
         Get_Demonic_Wisp()
     else
         Buy_7m()
+        task.wait(5)
     end
 
 end
