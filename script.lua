@@ -69,7 +69,7 @@ local function tp(pos)
     character.HumanoidRootPart.CFrame = pos
 end
 
-local function tween(targetCFrame, _cancel)
+local function tween(targetCFrame)
     local TweenPart = workspace:FindFirstChild("TweenPart") or creatTweenPart()
     TweenPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
 
@@ -79,7 +79,7 @@ local function tween(targetCFrame, _cancel)
 
     local distance = (targetCFrame.Position - TweenPart.Position).Magnitude
     
-    if distance < 20 then
+    if distance < 50 then
         tp(targetCFrame)
         return
     end
@@ -93,8 +93,6 @@ local function tween(targetCFrame, _cancel)
     getgenv().startTween = TweenService:Create(TweenPart, tweenInfo, {CFrame = targetCFrame})
     getgenv().startTween:Play()
     getgenv().startTween.Completed:Wait()
-
-    if _cancel then isTweening = false end
 
 end
 
@@ -394,7 +392,7 @@ local function Get_Dark_Flagment()
         task.wait(1)
     else
         local startTime = os.clock()
-        local timeLimit = 120 -- 1 นาที 30 วิ (วินาที)
+        local timeLimit = 120
 
         repeat task.wait()
             collectChest()
@@ -423,7 +421,7 @@ local function Get_Vampire_Fang()
             _anemyPos = nil
         end
         repeat task.wait()
-            tween(CFrame.new(_anemyPos or anemy.HumanoidRootPart.Position) * CFrame.new(0,30,0),false)
+            tween(CFrame.new(_anemyPos or anemy.HumanoidRootPart.Position) * CFrame.new(0,30,0))
             equipTool("Melee")
             spawn(function()
                 bringMob(anemy)
@@ -444,7 +442,7 @@ local function Get_Demonic_Wisp()
             _anemyPos = nil
         end
         repeat task.wait()
-            tween(CFrame.new(_anemyPos or anemy.HumanoidRootPart.Position) * CFrame.new(0,30,0),false)
+            tween(CFrame.new(_anemyPos or anemy.HumanoidRootPart.Position) * CFrame.new(0,30,0))
             equipTool("Melee")
             spawn(function()
                 bringMob(anemy)
@@ -457,7 +455,7 @@ local function Buy_7m()
     if game:GetService("Lighting"):GetAttribute("MAP") ~= "Sea3" then tpWorld(3) end
     tween(CFrame.new(-16516.1328125, 23.38727569580078, -189.69615173339844))
     task.wait(0.5)
-    ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("CommF_"):InvokeServer("BuySanguineArt")
+    game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("CommF_"):InvokeServer("BuySanguineArt")
 end
 
 local function Main()
