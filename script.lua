@@ -325,7 +325,7 @@ local function collectChest()
     if not Nearest or not Nearest.Parent then return end
 
     if Nearest then
-        humanoid.Jump = true
+        humanoid.Sit = false
         tween(Nearest:GetPivot())
         humanoid.Jump = true
     end
@@ -391,7 +391,7 @@ local function Get_Dark_Flagment()
         task.wait(1)
     else
         local startTime = os.clock()
-        local timeLimit = 120
+        local timeLimit = 90
 
         repeat task.wait()
             collectChest()
